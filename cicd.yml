@@ -33,7 +33,7 @@ steps:
       artifact: 'Databricks'
       DownloadPath: $(System.ArtifactsDirectory)/Databricks
   
-  - script: 'ls $(System.ArtifactDirectory)/Databricks'
+  # - script: 'ls $(System.ArtifactDirectory)/Databricks'
 
   - script: |
       BranchName = $(echo  awk -F/ '{print $NF}')
