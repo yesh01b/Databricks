@@ -24,7 +24,7 @@ steps:
     displayName: 'Configure databricks cli'
 
   - script: |
-      databricks wokspace ls
+      databricks workspace ls
     displayName: 'test databricks cli'
   
   - task: DownloadpipelineArtifact@2
