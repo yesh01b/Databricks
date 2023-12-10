@@ -40,7 +40,7 @@ steps:
       FOLDER = $(echo /$(Foldername))
       echo $Folder
       folder = $(databricks workspace ls --id $FOLDER)
-      databricks worspace rm $FOLDER --recursive
+      databricks workspace rm $FOLDER --recursive
     
     displayName: 'Delete old Release'
   
