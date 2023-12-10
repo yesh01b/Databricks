@@ -1,5 +1,6 @@
 trigger:
-  branches: dev
+  branches:
+    - dev
 
 pool:
   vmImage: ubuntu-latest
