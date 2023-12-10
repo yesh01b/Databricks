@@ -1,0 +1,52 @@
+pool:
+  vmImage: ubuntu-latest
+
+variables:
+  - group: 'DEV'
+  - name: branchName
+    value: $(Build.SourceBranch)
+  - name: folderName
+    value: release
+
+steps:
+  - task: PublishPipelineArtifact@1
+    inputs:
+      targetPath: '$(Build.Repository.LocalPath)/'
+      artifact: 'Databricks'
+      publishLocation: 'pipeline'
+  
+  - script: pip install databricks-cli
+    displayName: "Install Databricks-cli"
+  
+  - script: |
+      echo "$(databricksHost)
+      $(databricksToken)" | databricks configure --token
+    displayName: 'Configure databricks cli'
+
+  - script: |
+      databricks workspace ls
+    displayName: 'test databricks cli'
+  
+  - task: DownloadpipelineArtifact@2
+    inputs:
+      source: current
+      artifact: 'Databricks'
+      DownloadPath: $(System.ArtifactsDirectory)/Databricks
+  
+  # - script: 'ls $(System.ArtifactDirectory)/Databricks'
+
+  # - script: |
+  #     BranchName = $(echo  awk -F/ '{print $NF}')
+  #     FOLDER = $(echo /$(Foldername))
+  #     echo $Folder
+  #     folder = $(databricks workspace ls --id $FOLDER)
+  #     databricks workspace rm $FOLDER --recursive
+    
+  #   displayName: 'Delete old Release'
+  
+  - script: |
+      Branch_Name=$(echo  awk -F/ '{print $NF}')
+      FOLDER=$(echo /$(Foldername))
+      echo $FOLDER
+      databricks workspace import_dir $(System.ArtifactsDirectory)/Databricks $FOLDER --exclude-hidden-files
+    displayName: 'New release'
