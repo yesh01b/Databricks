@@ -20,7 +20,7 @@ steps:
   
   - script: |
       echo "$(databricksHost)
-      $(databricksToken)" | databricks Configire --token
+      $(databricksToken)" | databricks configure --token
     displayName: 'Configure databricks cli'
 
   - script: |
