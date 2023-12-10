@@ -48,5 +48,5 @@ steps:
       Branch_Name=$(echo  awk -F/ '{print $NF}')
       FOLDER=$(echo /$(Foldername))
       echo $FOLDER
-      databricks workspace import_dir $(System.ArtifactDirectory)/Databricks $FOLDER --exclude-hidden-files
+      databricks workspace import_dir $(System.ArtifactsDirectory)/Databricks $FOLDER --exclude-hidden-files
     displayName: 'New release'
