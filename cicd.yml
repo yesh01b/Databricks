@@ -11,7 +11,7 @@ variables:
 steps:
   - task: PublishPipelineArtifact@1
     inputs:
-      targetPath: '$(Build.Repository.LoclPath)/'
+      targetPath: '$(Build.Repository.LocalPath)/'
       artifact: 'Databricks'
       publishLocation: 'pipeline'
   
